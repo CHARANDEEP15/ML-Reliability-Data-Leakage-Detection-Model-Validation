@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount for hot reloading during dev (optional but useful)
+      - ./backend:/app/backend
+    environment:
+      - PYTHONPATH=/app
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # If running in browser, localhost:8000 is fine. 
+      # If SSR, it might need http://backend:8000.
+      # For now, we assume client-side calls mostly.
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+    restart: always

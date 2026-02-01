@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+pandas
+numpy
+scikit-learn
+scipy
+statsmodels
+matplotlib
+seaborn
+shap
+tabulate
+snowflake-connector-python
+google-cloud-bigquery
